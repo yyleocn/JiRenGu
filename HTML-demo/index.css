@@ -1,0 +1,56 @@
+html{
+    background-color: #333;
+}
+
+a {
+    text-decoration: none;
+    color:inherit;
+}
+
+.logo {
+    font-size: 24px;
+    font-variant: none;
+    font-family: "";
+    color: #CCC;
+    padding: 15px;
+    float:left;
+}
+
+.logo .RS {
+    color: #e6686a;
+    margin-right: 4px;
+}
+
+ul.topNav {
+    float: right;
+    list-style: none;
+    color: #EEE;
+    font-weight: bold;
+    margin: 0;
+    font-size:16px;
+}
+
+ul.topNav li {
+    width: auto;
+    float: left;
+    position: relative;
+    padding: 5px 10px;
+}
+
+ul.topNav li a {
+    color: inherit;
+    padding: 5px 10px;
+}
+
+ul.topNav li:hover a {
+    border-bottom: 3px solid #F77;
+}
+
+.clearfix::after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
