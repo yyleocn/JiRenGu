@@ -190,6 +190,11 @@ ul.navList li:hover a {
     width: 40px;
     line-height: 30px;
     padding: 5px 0;
+    border-radius: 50%;
+}
+
+.info .infoFooter a:hover {
+    background-color: #CF5D5F;
 }
 
 .info .infoFooter .icon {
