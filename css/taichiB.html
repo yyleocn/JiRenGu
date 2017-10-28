@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            background-color: #CCC;
+        }
+        
+        .taichi {
+            width: 200px;
+            height: 200px;
+            background-color: #FFF;
+            border-radius: 50%;
+            position: relative;
+            background: linear-gradient( #ffffff 0%, #ffffff 50%, #000000 50%, #000000 100%);
+        }
+        
+        .taichi::before,
+        .taichi::after {
+            content: "";
+            position: absolute;
+            top: 25%;
+            border-radius: 50%;
+            width: 50%;
+            height: 50%;
+        }
+        
+        .taichi::before {
+            left: 0;
+            background: radial-gradient( #ffffff 20%, #000000 20%);
+        }
+        
+        .taichi::after {
+            right: 0;
+            background: radial-gradient( #000000 20%, #ffffff 20%);
+        }
+        /*.rotateLeft {
+            transform: rotate(-90deg);
+        }*/
+    </style>
+</head>
+
+<body>
+    <div class="taichi rotateLeft"></div>
+</body>
+
+</html>
