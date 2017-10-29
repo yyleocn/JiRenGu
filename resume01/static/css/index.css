@@ -10,6 +10,7 @@
 body {
     background-color: #EFEFEF;
     overflow-y: scroll;
+    padding-bottom: 50px;
 }
 
 a {
@@ -114,7 +115,8 @@ ul.navList li:hover a {
 
 .info {
     max-width: 940px;
-    margin: -345px auto 0;
+    margin: -340px auto 0;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
 .info .infoCard {
@@ -207,7 +209,7 @@ ul.navList li:hover a {
 
 .downloadResume {
     text-align: center;
-    margin-top: 35px;
+    margin-top: 32px;
 }
 
 .downloadResume a {
@@ -216,7 +218,7 @@ ul.navList li:hover a {
     border: 1px solid #cbcdcf;
     font-weight: bold;
     line-height: 16px;
-    font-size: 15px;
+    font-size: 14px;
     color: #3d4451;
     transition: box-shadow 0.3s;
 }
@@ -227,15 +229,86 @@ ul.navList li:hover a {
 
 .selfIntroduction {
     text-align: center;
-    line-height: 2;
-    margin-top:30px; 
+    line-height: 1.8;
+    font-size: 18px;
+    margin-top: 30px;
 }
-.selfIntroduction p{
+
+.selfIntroduction p {
     max-width: 940px;
     margin: 0 auto;
 }
 
-.skill{
+.skillIntroduction {
     text-align: center;
-    margin-top: 70px;
+    margin: 60px auto 0;
+    max-width: 940px;
+    color: #3d4451;
+}
+
+.skillIntroduction h1{
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+.skillList {
+    margin-top: 30px;
+    list-style: none;
+    padding: 42px 50px 10px;
+    background: #FFF;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.skillList li {
+    width: 48%;
+    float: left;
+    margin-bottom: 32px;
+}
+
+.skillList li:nth-child(even) {
+    float: right;
+}
+
+.skillList li .skillName {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.skillList li .percentBar {
+    background: #FAE1E1;
+}
+
+.percentBar {
+    height: 5px;
+    border-radius: 2px;
+    margin: 4px auto;
+    position: relative;
+}
+
+.percentBar::before {
+    content: ' ';
+    height: 100%;
+    width: 50%;
+    background: #E6686A;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 2px;
+}
+
+.percentBar.percent20::before {
+    width: 20%;
+}
+
+.percentBar.percent40::before {
+    width: 40%;
+}
+
+.percentBar.percent60::before {
+    width: 60%;
+}
+
+.percentBar.percent80::before {
+    width: 80%;
 }
