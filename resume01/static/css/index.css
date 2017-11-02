@@ -10,7 +10,7 @@
 body {
     background-color: #EFEFEF;
     overflow-y: scroll;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 a {
@@ -246,7 +246,7 @@ ul.navList li:hover a {
     color: #3d4451;
 }
 
-.skillIntroduction h1{
+.skillIntroduction h1 {
     font-size: 34px;
     line-height: 1.2;
 }
@@ -277,24 +277,25 @@ ul.navList li:hover a {
 
 .skillList li .percentBar {
     background: #FAE1E1;
+    border-color: #FAE1E1;
 }
 
 .percentBar {
-    height: 5px;
-    border-radius: 2px;
+    border: 3px solid transparent;
+    border-radius: 3px;
     margin: 4px auto;
     position: relative;
 }
 
 .percentBar::before {
     content: ' ';
-    height: 100%;
+    height: 0;
     width: 50%;
-    background: #E6686A;
+    border: 3px solid #E6686A;
     position: absolute;
-    left: 0;
-    top: 0;
-    border-radius: 2px;
+    left: -3px;
+    top: -3px;
+    border-radius: 3px;
 }
 
 .percentBar.percent20::before {
@@ -311,4 +312,86 @@ ul.navList li:hover a {
 
 .percentBar.percent80::before {
     width: 80%;
+}
+
+.portfolio {
+    max-width: 940px;
+    margin: 60px auto 0;
+    color: #3d4451;
+    text-align: center;
+}
+
+.portfolio h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.portfolioNav {
+    list-style: none;
+    display: inline-block;
+    margin-top: 32px;
+}
+
+.portfolioNav li {
+    display: inline-block;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.portfolioNav .switchBar {
+    margin: 10px 20px 0;
+    border: 3px solid #FFF;
+    border-radius: 3px;
+    position: relative;
+}
+
+.portfolioNav hr.switchBar::before {
+    content: ' ';
+    height: 0;
+    border: 3px solid #E6686A;
+    border-radius: 3px;
+    position: absolute;
+    top: -3px;
+    transition: all 0.3s;
+}
+
+.portfolioNav hr.portfolio1::before {
+    left: -3px;
+    width: 26px;
+}
+
+.portfolioNav hr.portfolio2::before {
+    left: 74px;
+    width: 57px;
+}
+
+.portfolioNav hr.portfolio3::before {
+    left: 183px;
+    width: 24px;
+}
+
+.portfolio .works{
+    height: 600px;
+    position: relative;
+    margin-top:30px;
+}
+
+.portfolio .works img{
+    position: absolute;
+}
+
+.portfolio .works .works01{
+    left: 0;
+    top: 0;
+}
+
+.portfolio .works .works02{
+    left: 645px;
+    top: 0;
+}
+
+.portfolio .works .works03{
+    left: 645px;
+    top: 312px;
 }

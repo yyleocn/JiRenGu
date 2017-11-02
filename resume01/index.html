@@ -116,30 +116,56 @@
         <ul class="skillList clearfix">
             <li class="skill">
                 <div class="skillName">HTML 5 & CSS 3</div>
-                <div class="percentBar percent60"></div>
+                <hr class="percentBar percent60">
             </li>
             <li class="skill">
                 <div class="skillName">JavaScript</div>
-                <div class="percentBar"></div>
+                <hr class="percentBar">
             </li>
             <li class="skill">
                 <div class="skillName">jQuery</div>
-                <div class="percentBar"></div>
+                <hr class="percentBar">
             </li>
             <li class="skill">
                 <div class="skillName">Vue.js</div>
-                <div class="percentBar percent40"></div>
+                <hr class="percentBar percent20">
             </li>
             <li class="skill">
                 <div class="skillName">React.js</div>
-                <div class="percentBar percent80"></div>
+                <hr class="percentBar percent40">
             </li>
             <li class="skill">
                 <div class="skillName">Node.js</div>
-                <div class="percentBar clearfix"></div>
+                <hr class="percentBar">
             </li>
         </ul>
     </section>
+    <section class="portfolio">
+        <h1>作品集</h1>
+        <ol class="portfolioNav">
+            <li id="portfolio1">所有</li>
+            <li id="portfolio2">静态页面</li>
+            <li id="portfolio3">SPA</li>
+            <hr class="switchBar portfolio1">
+        </ol>
+        <div class="works">
+            <img src="./static/img/works/1.jpg" class="works01" alt="Works01">
+            <img src="./static/img/works/2.jpg" class="works02" alt="Works02">
+            <img src="./static/img/works/3.jpg" class="works03" alt="Works03">
+        </div>
+    </section>
+    <script>
+        let switchBar = document.querySelector('.portfolioNav hr.switchBar');
+        portfolio1.onclick = function () {
+            switchBar.className = 'switchBar portfolio1'
+        }
+        portfolio2.onclick = function () {
+            switchBar.className = 'switchBar portfolio2'
+        }
+        portfolio3.onclick = function () {
+            switchBar.className = 'switchBar portfolio3'
+        }
+    </script>
 </body>
 
 </html>
