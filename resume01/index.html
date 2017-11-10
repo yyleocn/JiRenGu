@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>杨乐的个人简历</title>
+    <script src="//at.alicdn.com/t/font_453880_buey06jqveave7b9.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./static/css/index.css" />
+</head>
+
+<body>
+    <nav class="navBar">
+        <div class="navBarInner clearfix">
+            <div class="logo">
+                <a href="/">
+                    <span class="RS">RS</span>card
+                </a>
+            </div>
+            <ul class="navList">
+                <li>
+                    <a href="#">关于</a>
+                </li>
+                <li>
+                    <a href="#">技能</a>
+                </li>
+                <li>
+                    <a href="#">博客</a>
+                </li>
+                <li>
+                    <a href="#">作品</a>
+                </li>
+                <li>
+                    <a href="#">GitHub</a>
+                </li>
+                <li>
+                    <a href="#">知乎</a>
+                </li>
+                <li>
+                    <a href="#">联系方式</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="topBanner">
+        <div class="cover"></div>
+    </div>
+    <section class="info clearfix">
+        <div class="infoCard clearfix">
+            <div class="picture">
+                <img src="./static/img/avatar.jpg" alt="照片" width="300px">
+            </div>
+            <div class="profile">
+                <div class="welcome">HELLO</div>
+                <h1>杨乐</h1>
+                <p>前端攻城狮</p>
+                <hr>
+                <dl>
+                    <dt>年龄</dt>
+                    <dd>28</dd>
+                    <dt>所在城市</dt>
+                    <dd>郑州</dd>
+                    <dt>邮箱</dt>
+                    <dd>youngleocn@qq.com</dd>
+                    <dt>电话</dt>
+                    <dd>18612345678</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="infoFooter">
+            <a href="#">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-pinnedoctocat"></use>
+                </svg>
+            </a>
+            <a href="#">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-twitter"></use>
+                </svg>
+            </a>
+            <a href="#">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-yingdaicon04"></use>
+                </svg>
+            </a>
+            <a href="#">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            </a>
+            <a href="#">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-windows8"></use>
+                </svg>
+            </a>
+            <a href="#">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-email-copy"></use>
+                </svg>
+            </a>
+        </div>
+    </section>
+    <section class="downloadResume">
+        <a href="#">下载 PDF 简历</a>
+    </section>
+    <section class="selfIntroduction">
+        <p>
+            杨乐：入门前端工程师。<br> 技能：前端开发、Node.js开发、Python开发。
+        </p>
+    </section>
+    <section class="skillIntroduction">
+        <h1>
+            技能
+        </h1>
+        <ul class="skillList clearfix">
+            <li class="skill">
+                <div class="skillName">HTML 5 & CSS 3</div>
+                <hr class="percentBar percent60">
+            </li>
+            <li class="skill">
+                <div class="skillName">JavaScript</div>
+                <hr class="percentBar">
+            </li>
+            <li class="skill">
+                <div class="skillName">jQuery</div>
+                <hr class="percentBar">
+            </li>
+            <li class="skill">
+                <div class="skillName">Vue.js</div>
+                <hr class="percentBar percent20">
+            </li>
+            <li class="skill">
+                <div class="skillName">React.js</div>
+                <hr class="percentBar percent40">
+            </li>
+            <li class="skill">
+                <div class="skillName">Node.js</div>
+                <hr class="percentBar">
+            </li>
+        </ul>
+    </section>
+    <section class="portfolio">
+        <h1>作品集</h1>
+        <ol class="portfolioNav">
+            <li id="portfolio1">所有</li>
+            <li id="portfolio2">静态页面</li>
+            <li id="portfolio3">SPA</li>
+            <hr class="switchBar portfolio1">
+        </ol>
+        <div class="works">
+            <img src="./static/img/works/1.jpg" class="works01" alt="Works01">
+            <img src="./static/img/works/2.jpg" class="works02" alt="Works02">
+            <img src="./static/img/works/3.jpg" class="works03" alt="Works03">
+        </div>
+    </section>
+    <script>
+        let switchBar = document.querySelector('.portfolioNav hr.switchBar');
+        portfolio1.onclick = function () {
+            switchBar.className = 'switchBar portfolio1'
+        }
+        portfolio2.onclick = function () {
+            switchBar.className = 'switchBar portfolio2'
+        }
+        portfolio3.onclick = function () {
+            switchBar.className = 'switchBar portfolio3'
+        }
+    </script>
+</body>
+
+</html>
