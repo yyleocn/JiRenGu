@@ -1,0 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#keyboard{
+    text-align: left;
+}
+
+#keyboard{
+
+}
+
+#keyboard .keyRow{
+    display: inline-block;
+    /*margin-bottom: 20px;*/
+}
+
+/*#keyboard .keyRow::after{
+    content: ' ';
+    display: block;
+    height: 3px;
+    width: 100%;
+}*/
+
+#keyboard kbd{
+    display: block;
+    float: left;
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+    text-align: center;
+    text-transform: capitalize;
+    width: 3em;
+    height: 3em;
+    line-height: 3em;
+    font-size: 20px;
+    background-color: #222;
+    color:#FFF;
+    border-radius: 0.5em;
+    margin:0.2em;
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    position: relative;
+}
+
+#keyboard kbd button.editButton{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right:0.5em;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 0.2em;
+    border:1px solid transparent;
+    background-color: #CCC;
+}
+
+#keyboard kbd:hover button.editButton{
+    display: block;
+    animation: fade-in;
+    animation-duration: 0.2s;/*动画持续时间*/  
+}
+
+#keyboard kbd.letter{
+    line-height: 1em;
+    padding-top: 0.5em;
+}
+
+#keyboard kbd.tab{
+    width:4.7em;
+}
+
+#keyboard kbd.caps{
+    width:5.9em;
+}
+
+#keyboard kbd.shift{
+    width:7.7em;
+}
+
+@keyframes fade-in {  
+    0% {opacity: 0;}/*初始状态 透明度为0*/  
+    50% {opacity: 0;}/*过渡状态 透明度为0*/  
+    100% {opacity: 1;}/*结束状态 透明度为1*/  
+} 
