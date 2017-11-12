@@ -12,10 +12,10 @@ let createTag = function (tag_, attr_) {
     return tagObj;
 };
 
-function configManage(name_, default_) {
+function configManager(name_, default_) {
     'use strict';
     if (!new.target) {
-        return new configManage(name_, default_);
+        return new configManager(name_, default_);
     }
     let config = null;
     try {
@@ -25,7 +25,7 @@ function configManage(name_, default_) {
     }
     if (!config) {
         console.log('Load default config.');
-        config = default_;
+        config = default_ || {};
     }
     this.getConfig = function (key_) {
         return config[key_]
@@ -39,13 +39,18 @@ function configManage(name_, default_) {
     }
 };
 
-let urlopen = function (keyboardUrlConfig_, event_) {
-    let key = event_.key
-    if (!keyboardUrlConfig_.getConfig(key)) {
+let keyboardPressEvent = function (keyboardUrlConfig_, event_) {
+    let key = event_.key;
+    urlOpen(keyboardUrlConfig_, key);
+};
+
+let urlOpen = function (keyboardUrlConfig_, key_) {
+    if (!keyboardUrlConfig_.getConfig(key_)) {
         return false;
     }
-    window.open('http://' + keyboardUrlConfig_.getConfig(key), '_blank');
-}
+    window.open('http://' + keyboardUrlConfig_.getConfig(key_), '_blank');
+};
+
 let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankFavicon_) {
     if (!(box_ || {}).tagName) {
         return false;
@@ -62,15 +67,23 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                     innerText: key_,
                     className: key_,
                 });
-            let editButton = createTag(
-                'button', {
-                    innerText: 'E',
-                    type: 'button',
-                    className: 'editButton'
-                },
-            );
+            // let editButton = createTag(
+            //     'button', {
+            //         innerText: 'E',
+            //         type: 'button',
+            //         className: 'editButton'
+            //     },
+            // );
             if (key_.match(/^[a-z]$/i)) {
                 let favicon = {};
+                keyObj.oncontextmenu = function (event_) {
+                    let result = window.prompt('请输入快捷键 ' + key_ + ' 的网址', '');
+                    if (result) {
+                        keyboardUrlConfig_.setConfig(key_, result);
+                        favicon.url = 'http://' + result + '/favicon.ico'
+                    }
+                    return false;
+                };
                 if (defaultFavicon_) {
                     favicon = createTag(
                         'img',
@@ -90,15 +103,21 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                     keyObj.appendChild(favicon);
                 }
                 keyObj.className = 'letter';
-                editButton.onclick = function () {
-                    let result = window.prompt('请输入' + key_ + '的快捷网址', '');
-                    if (result) {
-                        keyboardUrlConfig_.setConfig(key_, result);
-                        favicon.url = 'http://' + result + '/favicon.ico'
-                    }
+                // editButton.onclick = function () {
+                //     let result = window.prompt('请输入' + key_ + '的快捷网址', '');
+                //     if (result) {
+                //         keyboardUrlConfig_.setConfig(key_, result);
+                //         favicon.url = 'http://' + result + '/favicon.ico'
+                //     }
+                // }
+            } else {
+                keyObj.oncontextmenu = function (event_) {
+                    event_.target.blur();
+                    // event_.cancelBubble = true;
+                    return false;
                 }
             }
-            keyObj.appendChild(editButton);
+            // keyObj.appendChild(editButton);
             keyRowBox.appendChild(keyObj);
         });
         box_.appendChild(keyRowBox);
@@ -130,13 +149,13 @@ let defaultFavicon = './static/img/defaultFavicon.png'
 let blankFavicon = './static/img/blankFavicon.png'
 
 /***** process */
-let keyboardLinkConfig = configManage(configName, keyboardUrlConfigDefault);
+let keyboardLinkConfig = configManager(configName, keyboardUrlConfigDefault);
 let keyboardBox = document.querySelector('#keyboard', {});
 let initRes = keyboardCreate(
     keyboardBox, keyboardLinkConfig,
     defaultFavicon, blankFavicon
 );
-document.onkeypress = urlopen.bind(null, keyboardLinkConfig);
+document.onkeypress = keyboardPressEvent.bind(null, keyboardLinkConfig);
 if (!initRes) {
     console.log('Init fail.')
 }
