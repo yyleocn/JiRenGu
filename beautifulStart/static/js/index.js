@@ -76,14 +76,6 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
             // );
             if (key_.match(/^[a-z]$/i)) {
                 let favicon = {};
-                keyObj.oncontextmenu = function (event_) {
-                    let result = window.prompt('请输入快捷键 ' + key_ + ' 的网址', '');
-                    if (result) {
-                        keyboardUrlConfig_.setConfig(key_, result);
-                        favicon.url = 'http://' + result + '/favicon.ico'
-                    }
-                    return false;
-                };
                 if (defaultFavicon_) {
                     favicon = createTag(
                         'img',
@@ -102,6 +94,15 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                     }
                     keyObj.appendChild(favicon);
                 }
+                keyObj.oncontextmenu = function (event_) {
+                    let result = window.prompt('请输入快捷键 ' + key_ + ' 的网址', '');
+                    if (result) {
+                        keyboardUrlConfig_.setConfig(key_, result);
+                        favicon.src = 'http://' + result + '/favicon.ico'
+                    }
+                    event_.preventDefault();
+                    return false;
+                };
                 keyObj.className = 'letter';
                 // editButton.onclick = function () {
                 //     let result = window.prompt('请输入' + key_ + '的快捷网址', '');
@@ -112,8 +113,9 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                 // }
             } else {
                 keyObj.oncontextmenu = function (event_) {
+                    event_.preventDefault();
                     event_.target.blur();
-                    // event_.cancelBubble = true;
+                    event_.cancelBubble = true;
                     return false;
                 }
             }
