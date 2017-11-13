@@ -5,6 +5,7 @@
 
 #keyboardOutter {
   text-align: center;
+  min-width: 1000px;
 }
 
 #keyboard {
@@ -34,7 +35,7 @@
   width: 3em;
   height: 3em;
   line-height: 3em;
-  font-size: 24px;
+  font-size: 18px;
   background-color: #111;
   color: #fff;
   border-radius: 0.5em;
@@ -44,8 +45,30 @@
   box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.7);
   box-sizing: content-box;
   position: relative;
-  
 }
+
+@media (min-width:1200px) {
+  #keyboard kbd{
+    font-size: 20px;
+  }
+}
+@media (min-width:1400px) {
+  #keyboard kbd{
+    font-size: 24px;
+  }
+}
+
+@media (min-width:1700px) {
+  #keyboard kbd{
+    font-size: 30px;
+  }
+}
+@media (min-width:2200px) {
+  #keyboard kbd{
+    font-size: 36px;
+  }
+}
+
 
 #keyboard kbd:active {
   top: 0.1em;
@@ -81,7 +104,7 @@
 }
 
 #keyboard kbd.letter {
-  line-height: 1.5em;
+  line-height: 2em;
 }
 
 #keyboard kbd.tab {
