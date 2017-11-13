@@ -48,27 +48,28 @@
 }
 
 @media (min-width:1200px) {
-  #keyboard kbd{
+  #keyboard kbd {
     font-size: 20px;
   }
 }
+
 @media (min-width:1400px) {
-  #keyboard kbd{
+  #keyboard kbd {
     font-size: 24px;
   }
 }
 
 @media (min-width:1700px) {
-  #keyboard kbd{
+  #keyboard kbd {
     font-size: 30px;
   }
 }
+
 @media (min-width:2200px) {
-  #keyboard kbd{
+  #keyboard kbd {
     font-size: 36px;
   }
 }
-
 
 #keyboard kbd:active {
   top: 0.1em;
