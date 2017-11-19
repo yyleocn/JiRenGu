@@ -3,8 +3,13 @@ console.log('Start!');
 let createTag = function (tag_, attr_) {
     let tagObj = document.createElement(tag_);
     if (attr_) {
-        for (let attr in attr_) {
-            tagObj[attr] = attr_[attr];
+        for (let key in attr_) {
+            let attr = attr_[key];
+            if (Array.isArray(attr)) {
+                tagObj[key] = attr.join(' ');
+            } else {
+                tagObj[key] = attr_[key];
+            }
         }
     }
     return tagObj;
@@ -35,6 +40,12 @@ let sketch = function (target_) {
     window.addEventListener('resize', windowResize);
     target_.appendChild(canvasObj);
 
+    //** init toolBar */
+    let toolBar = createTag('div', {
+        className: 'toolBar',
+    })
+    target_.appendChild(toolBar);
+
     //** init colorPicker */
     let colorPicker = createTag('input', {
         type: 'color',
@@ -54,8 +65,8 @@ let sketch = function (target_) {
     let widthPicker = createTag('input', {
         type: 'range',
         className: 'widthPicker',
-        min: '1',
-        max: '10',
+        min: 1,
+        max: 10,
     });
     let widthPickerChange =
         function (event_) {
@@ -69,10 +80,10 @@ let sketch = function (target_) {
     target_.appendChild(widthPicker);
 
     //** init modePicker */
-    let modePicker = createTag('input', {
-        type: 'button',
-        className: 'modePicker',
+    let modePicker = createTag('i', {
+        className: ['iconfont', 'icon-pen', 'modePicker'],
     });
+    target_.appendChild(modePicker);
 }
 
 let sketchObj = document.querySelector('#sketch');
