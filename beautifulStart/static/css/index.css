@@ -3,6 +3,15 @@
   margin: 0;
 }
 
+#app {
+  background: url('https://cn.bing.com/az/hprichbg/rb/MudstoneBadlands_ZH-CN9863836503_1920x1080.jpg');
+  background-position: center center;
+  background-size: cover;
+  height: 100vh;
+  padding-top: 40vh;
+  box-sizing: border-box;
+}
+
 #keyboardOutter {
   text-align: center;
   min-width: 1000px;
@@ -11,6 +20,7 @@
 #keyboard {
   display: inline-block;
   text-align: left;
+  font-size:1rem;
 }
 
 #keyboard .keyRow {
@@ -35,7 +45,7 @@
   width: 3em;
   height: 3em;
   line-height: 3em;
-  font-size: 18px;
+  font-size: 1em;
   background-color: #111;
   color: #fff;
   border-radius: 0.5em;
@@ -49,25 +59,25 @@
 
 @media (min-width:1200px) {
   #keyboard kbd {
-    font-size: 20px;
+    font-size: 1em;
   }
 }
 
 @media (min-width:1400px) {
   #keyboard kbd {
-    font-size: 24px;
+    font-size: 1.2em;
   }
 }
 
 @media (min-width:1700px) {
   #keyboard kbd {
-    font-size: 30px;
+    font-size: 1.5em;
   }
 }
 
 @media (min-width:2200px) {
   #keyboard kbd {
-    font-size: 36px;
+    font-size: 1.8em;
   }
 }
 
