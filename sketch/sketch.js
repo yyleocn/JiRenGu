@@ -1,5 +1,7 @@
 console.log('Start!');
 
+document.write(1);
+
 let createTag = function (tag_, attr_) {
     let tagObj = document.createElement(tag_);
     if (attr_) {
@@ -11,8 +13,7 @@ let createTag = function (tag_, attr_) {
     return tagObj;
 };
 
-document.write(1);
-
+document.write(2);
 
 let canvasFillCircle = function (context_, x_, y_, radius_, color_) {
     if (!context_ instanceof CanvasRenderingContext2D) {
