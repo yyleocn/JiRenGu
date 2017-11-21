@@ -17,6 +17,7 @@
 
 #sketch>canvas {
     top: 3em;
+    background-color: #EEE;
 }
 
 #sketch .toolBar {

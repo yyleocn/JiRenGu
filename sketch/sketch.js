@@ -11,6 +11,7 @@ let createTag = function (tag_, attr_) {
     return tagObj;
 };
 
+document.write(1);
 
 
 let canvasFillCircle = function (context_, x_, y_, radius_, color_) {
@@ -55,7 +56,6 @@ let sketch = function (target_) {
         return new sketch(target_);
     };
 
-    document.write(1);
     //***** init config */
     let config = {
         radius: 2,
@@ -67,7 +67,6 @@ let sketch = function (target_) {
 
     };
 
-    document.write(2);
     //***** get event offset */
     let getEventOffset = function (event_, target_) {
         if (event_ instanceof TouchEvent) {
@@ -90,7 +89,6 @@ let sketch = function (target_) {
             y: 0,
         }
     };
-    document.write(3);
     //** init toolBar */
     let toolBar = createTag('div', {
         className: 'toolBar',
@@ -110,7 +108,6 @@ let sketch = function (target_) {
     window.addEventListener('resize', windowResize);
     target_.appendChild(canvasObj);
 
-    document.write(4);
     //***** canvas event bind */
     let canvasEventBind = function (target_, start_, move_, end_) {};
     if (isTouchDevice()) {
@@ -142,7 +139,6 @@ let sketch = function (target_) {
     );
     toolBar.appendChild(colorPicker);
 
-    document.write(5);
     //** init widthPicker */
     let widthPicker = createTag('input', {
         type: 'range',
@@ -218,7 +214,6 @@ let sketch = function (target_) {
         },
     };
 
-    document.write(6);
     //** init modePicker */
     let modePick = function (event_) {
         let target = event_.target;
