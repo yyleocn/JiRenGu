@@ -14,7 +14,7 @@ let createTag = function (tag_, attr_) {
 
 function configManager(name_, default_) {
     'use strict';
-    if (!new.target) {
+    if (!this instanceof configManager) {
         return new configManager(name_, default_);
     }
     let config = null;
@@ -78,8 +78,7 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                 let favicon = {};
                 if (defaultFavicon_) {
                     favicon = createTag(
-                        'img',
-                        {
+                        'img', {
                             src: blankFavicon_,
                             className: 'favicon'
                         }
@@ -132,10 +131,10 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
 /***** define config */
 
 let keyboardLetterArray = [
-    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'back',],
-    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',],
-    ['caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter',],
-    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift',],
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'back', ],
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', ],
+    ['caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', ],
+    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift', ],
 ];
 
 let keyboardUrlConfigDefault = {
