@@ -19,7 +19,7 @@ let canvasFillCircle = function (context_, x_, y_, radius_, color_) {
     context_.beginPath();
     context_.arc(
         x_, y_, radius_,
-        0, Math.PI * 2,
+        0, Math.PI * 2
     );
     context_.fillStyle = color_;
     context_.fill();
@@ -58,7 +58,7 @@ function sketch(target_) {
     let config = {
         radius: 2,
         mode: 'default',
-        color: '#000',
+        color: '#0000FF',
         mouseClicking: false,
         lastPointX: 0,
         lastPointY: 0,
@@ -126,6 +126,7 @@ function sketch(target_) {
     let colorPicker = createTag('input', {
         type: 'color',
         className: 'colorPicker',
+        value: config.color,
     });
     let colorPickerChange =
         function (event_) {
@@ -157,15 +158,26 @@ function sketch(target_) {
 
 
 
-    /***** define click event */
-    let saveBtn = createTag('i', {
+    /***** save button */
+    let saveButton = createTag('i', {
         className: ['iconfont', 'icon-download', ],
         mode: 'default',
     });
-    saveBtn.addEventListener('click', function (event_) {
+    saveButton.addEventListener('click', function (event_) {
         console.log(event_);
     })
-    toolBar.appendChild(saveBtn);
+    toolBar.appendChild(saveButton);
+
+
+    /***** clear button */
+    let clearButton = createTag('i', {
+        className: ['iconfont', 'icon-delete2f', ],
+        mode: 'default',
+    });
+    clearButton.addEventListener('click', function (event_) {
+        console.log(event_);
+    })
+    toolBar.appendChild(clearButton);
 
     /***** event bind cache list */
     let clearEventBind = function () {};
@@ -178,7 +190,7 @@ function sketch(target_) {
                 canvasFillCircle(
                     canvasContext,
                     eventOffset.x, eventOffset.y,
-                    config.radius, config.color,
+                    config.radius, config.color
                 )
                 //***** update config */
                 config.lastPointX = eventOffset.x;
@@ -190,17 +202,16 @@ function sketch(target_) {
                     return undefined;
                 }
                 let eventOffset = getEventOffset(event_, canvasObj);
-                console.log(eventOffset);
                 canvasFillLine(
                     canvasContext,
                     config.lastPointX, config.lastPointY,
                     eventOffset.x, eventOffset.y,
-                    config.radius * 2, config.color,
+                    config.radius * 2, config.color
                 );
                 canvasFillCircle(
                     canvasContext,
                     eventOffset.x, eventOffset.y,
-                    config.radius, config.color,
+                    config.radius, config.color
                 );
                 //***** update config */
                 config.lastPointX = eventOffset.x;
@@ -223,6 +234,7 @@ function sketch(target_) {
             target.parentNode.querySelector('.modePicker.active').classList.remove('active');
         }
         target.classList.add('active');
+        canvasObj.className = target.mode;
         switch (target.mode) {
             case 'pen':
                 {
@@ -244,7 +256,7 @@ function sketch(target_) {
                         canvasObj,
                         null,
                         null,
-                        null,
+                        null
                     );
                 }
         }
@@ -278,7 +290,7 @@ function sketch(target_) {
         target_,
         config,
         canvasObj,
-        canvasContext,
+        canvasContext
     ])
 }
 
