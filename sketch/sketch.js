@@ -5,11 +5,7 @@ let createTag = function (tag_, attr_) {
     if (attr_) {
         for (let key in attr_) {
             let attr = attr_[key];
-            if (Array.isArray(attr)) {
-                tagObj[key] = attr.join(' ');
-            } else {
-                tagObj[key] = attr_[key];
-            }
+            tagObj[key] = Array.isArray(attr) ? attr.join(' ') : attr;
         }
     }
     return tagObj;
@@ -17,34 +13,35 @@ let createTag = function (tag_, attr_) {
 
 let sketch = function (target_) {
     'use strict';
-    if (!new.target) {
+    if (!(this instanceof sketch)) {
+        console.warn('sketch function called');
         return new sketch(target_);
     };
 
     //***** init config */
     let config = {
-        width: 50,
-        mode: 'draw',
+        width: 5,
+        mode: 'default',
         color: '#000',
     };
-
-    //***** init canvas */
-    let canvasObj = createTag('canvas', {
-        innerHtml: '浏览器不支持Canvas',
-    });
-    let windowResize = function () {
-        canvasObj.height = target_.clientHeight;
-        canvasObj.width = target_.clientWidth;
-    };
-    windowResize();
-    window.addEventListener('resize', windowResize);
-    target_.appendChild(canvasObj);
 
     //** init toolBar */
     let toolBar = createTag('div', {
         className: 'toolBar',
     })
     target_.appendChild(toolBar);
+
+    //***** init canvas */
+    let canvasObj = createTag('canvas', {
+        innerHtml: '浏览器不支持Canvas',
+    });
+    let windowResize = function () {
+        canvasObj.height = target_.clientHeight - toolBar.clientHeight;
+        canvasObj.width = target_.clientWidth;
+    };
+    windowResize();
+    window.addEventListener('resize', windowResize);
+    target_.appendChild(canvasObj);
 
     //** init colorPicker */
     let colorPicker = createTag('input', {
@@ -59,7 +56,7 @@ let sketch = function (target_) {
         'change',
         colorPickerChange
     );
-    target_.appendChild(colorPicker);
+    toolBar.appendChild(colorPicker);
 
     //** init widthPicker */
     let widthPicker = createTag('input', {
@@ -67,24 +64,97 @@ let sketch = function (target_) {
         className: 'widthPicker',
         min: 1,
         max: 10,
+        value: config.width,
     });
     let widthPickerChange =
         function (event_) {
             config.width = parseInt(event_.target.value);
-            console.log(config);
         }
     widthPicker.addEventListener(
         'change',
         widthPickerChange
     );
-    target_.appendChild(widthPicker);
+    toolBar.appendChild(widthPicker);
 
     //** init modePicker */
-    let modePicker = createTag('i', {
-        className: ['iconfont', 'icon-pen', 'modePicker'],
+    let modePick = function (event_) {
+        let target = event_.target;
+        if (target.classList.contains('active')) {
+            return;
+        }
+        config.mode = target.mode;
+        target.parentNode.querySelector('.modePicker.active').classList.remove('active');
+        target.classList.add('active');
+    };
+
+
+    let modeEraser = createTag('i', {
+        className: ['iconfont', 'icon-eraser', 'modePicker', ],
+        mode: 'eraser',
     });
-    target_.appendChild(modePicker);
+    modeEraser.onclick = modePick;
+    toolBar.appendChild(modeEraser);
+
+    let modePen = createTag('i', {
+        className: ['iconfont', 'icon-pen', 'modePicker', ],
+        mode: 'pen',
+    });
+    modePen.onclick = modePick;
+    toolBar.appendChild(modePen);
+
+    let modeDefault = createTag('i', {
+        className: ['iconfont', 'icon-hand', 'modePicker', 'active', ],
+        mode: 'default',
+    });
+    modeDefault.onclick = modePick;
+    toolBar.appendChild(modeDefault);
+
+    /***** define click event */
+    let saveBtn = createTag('i', {
+        className: ['iconfont', 'icon-download', ],
+        mode: 'default',
+    });
+    toolBar.appendChild(saveBtn);
+
+    /***** define click event */
+    let mouseClick = function (event_) {
+        switch (config.mode) {
+            case 'pen':
+                {
+                    break;
+                }
+            case 'eraser':
+                {
+                    break;
+                }
+            default:
+                {
+
+                }
+        }
+    }
+
+    let mouseMove = function (event_) {
+        switch (config.mode) {
+            case 'pen':
+                {
+                    break;
+                }
+            case 'eraser':
+                {
+                    break;
+                }
+            default:
+                {
+
+                }
+        }
+    }
+
+    let mouseRelease = function (event_) {
+
+    }
 }
 
 let sketchObj = document.querySelector('#sketch');
-sketch(sketchObj);
+let target = new sketch(sketchObj);
