@@ -5,7 +5,17 @@ let createTag = function (tag_, attr_) {
     if (attr_) {
         for (let key in attr_) {
             let attr = attr_[key];
-            tagObj[key] = Array.isArray(attr) ? attr.join(' ') : attr;
+            switch (key) {
+                case 'className':
+                    {
+                        tagObj[key] = Array.isArray(attr) ? attr.join(' ') : attr;
+                        break;
+                    }
+                default:
+                    {
+                        tagObj[key] = attr;
+                    }
+            }
         }
     }
     return tagObj;
@@ -98,12 +108,18 @@ function sketch(target_) {
         innerHtml: '浏览器不支持Canvas',
     });
     let canvasContext = canvasObj.getContext('2d');
-    let windowResize = function () {
+    let canvasResize = function () {
+        var canvasCopy = document.createElement('canvas'); // create a canvas copy dom
+        canvasCopy.width = canvasObj.width;
+        canvasCopy.height = canvasObj.height;
+        canvasCopy.getContext('2d').drawImage(canvasObj, 0, 0); // copy the 'old' canvas
+        // resize
         canvasObj.height = target_.clientHeight - toolBar.clientHeight;
         canvasObj.width = target_.clientWidth;
+        canvasContext.drawImage(canvasCopy, 0, 0); // copy back canvas
     };
-    windowResize();
-    window.addEventListener('resize', windowResize);
+    canvasResize();
+    window.addEventListener('resize', canvasResize);
     target_.appendChild(canvasObj);
 
     //***** canvas event bind */
@@ -175,7 +191,10 @@ function sketch(target_) {
         mode: 'default',
     });
     clearButton.addEventListener('click', function (event_) {
-        console.log(event_);
+        canvasContext.clearRect(
+            0, 0,
+            canvasObj.clientWidth, canvasObj.clientHeight
+        )
     })
     toolBar.appendChild(clearButton);
 

@@ -20,6 +20,8 @@
     top: 3em;
     background-color: #EEE;
 }
+
+
 /*
 #sketch canvas.pen:hover{
 cursor:e-resize;
@@ -36,11 +38,12 @@ cursor:e-resize;
 
 .toolBar * {
     display: block;
-    float: left;
     font-size: inherit;
     cursor: pointer;
-    margin-right: 1em;
+    float: left;
+    margin-right: 0.5em;
 }
+
 
 .toolBar input.colorPicker {
     height: 2em;
@@ -62,9 +65,10 @@ cursor:e-resize;
     transition: all 0.3s;
 }
 
-.toolBar .modePicker {
+.toolBar .iconfont.modePicker {
     float: right;
     margin-left: 0.5em;
+    margin-right: 0;
 }
 
 .toolBar .modePicker.active {
