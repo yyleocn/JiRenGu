@@ -237,25 +237,35 @@ function Sketch(target_) {
     });
     toolBar.appendChild(saveButton);
     let canvasSave = function (event_) {
+        // /** anchor method */
+        // document.location.href=canvasObj.toDataURL('image/png');
+
+        // /** anchor method */
         // let anchorDom = document.createElement('a');
-        // anchorDom.href=canvasObj.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        // anchorDom.download='sketch.png';
+        // anchorDom.href=canvasObj.toDataURL("image/png");
+        // anchorDom.target='_blank';
         // anchorDom.click();
-        // downloadFile('sketch.png', canvasObj.toDataURL("image/png"));
-        // let imgData = canvasObj.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+
+
+        /** new tab method */
         let imgData = canvasObj.toDataURL("image/png");
         let newTab = window.open('', '_blank');
-        let imgDom = newTab.document.createElement('img');
-        imgDom.src = imgData;
-        let anchorDom = newTab.document.createElement('a');
-        anchorDom.href = imgData;
-        anchorDom.download = 'sketch.png';
-        anchorDom.innerHTML = '下载';
-        newTab.document.body.appendChild(imgDom);
-        newTab.document.body.appendChild(
-            newTab.document.createElement('br')
-        );
-        newTab.document.body.appendChild(anchorDom);
+        newTab.document.write(
+            '<iframe style="height:90vh;width:90vw" src="' + imgData + '"></iframe>'
+        )
+        // let imgDom = newTab.document.createElement('img');
+        // imgDom.src = imgData;
+        // let anchorDom = newTab.document.createElement('a');
+        // anchorDom.href = imgData;
+        // anchorDom.target_ = '_blank';
+        // anchorDom.download = 'sketch.png';
+        // anchorDom.innerHTML = '下载';
+        // newTab.document.body.appendChild(imgDom);
+        // newTab.document.body.appendChild(
+        //     newTab.document.createElement('br')
+        // );
+        // newTab.document.body.appendChild(anchorDom);
     }
     saveButton.addEventListener('click', canvasSave);
 
