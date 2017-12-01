@@ -237,11 +237,25 @@ function Sketch(target_) {
     });
     toolBar.appendChild(saveButton);
     let canvasSave = function (event_) {
-        let anchorDom = document.createElement('a');
-        anchorDom.href=canvasObj.toDataURL("image/png");
-        anchorDom.download='sketch.png';
-        anchorDom.click();
+        // let anchorDom = document.createElement('a');
+        // anchorDom.href=canvasObj.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        // anchorDom.download='sketch.png';
+        // anchorDom.click();
         // downloadFile('sketch.png', canvasObj.toDataURL("image/png"));
+        // let imgData = canvasObj.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        let imgData = canvasObj.toDataURL("image/png");
+        let newTab = window.open('', '_blank');
+        let imgDom = newTab.document.createElement('img');
+        imgDom.src = imgData;
+        let anchorDom = newTab.document.createElement('a');
+        anchorDom.href = imgData;
+        anchorDom.download = 'sketch.png';
+        anchorDom.innerHTML = '下载';
+        newTab.document.body.appendChild(imgDom);
+        newTab.document.body.appendChild(
+            newTab.document.createElement('br')
+        );
+        newTab.document.body.appendChild(anchorDom);
     }
     saveButton.addEventListener('click', canvasSave);
 
