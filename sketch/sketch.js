@@ -21,6 +21,30 @@ let createTag = function (tag_, attr_) {
     return tagObj;
 };
 
+// let base64Img2Blob = function (code_) {
+//     let parts = code_.split(';base64,');
+//     let contentType = parts[0].split(':')[1];
+//     let raw = window.atob(parts[1]);
+//     let rawLength = raw.length;
+//     let uInt8Array = new Uint8Array(rawLength);
+//     for (let i = 0; i < rawLength; ++i) {
+//         uInt8Array[i] = raw.charCodeAt(i);
+//     }
+//     return new Blob([uInt8Array], {
+//         type: contentType
+//     });
+// }
+
+// let downloadFile = function (fileName_, content_) {
+//     let anchorDom = document.createElement('a');
+//     let blobObj = base64Img2Blob(content_); //new Blob([content]);
+//     let eventObj = document.createEvent("HTMLEvents");
+//     eventObj.initEvent("click", false, false); //initEvent 不加后两个参数在FF下会报错
+//     anchorDom.download = fileName_;
+//     anchorDom.href = URL.createObjectURL(blobObj);
+//     anchorDom.dispatchEvent(eventObj);
+// }
+
 let linePath = function (startX_, startY_, endX_, endY_) {
     let rangeX = endX_ - startX_;
     let rangeY = endY_ - startY_;
@@ -213,17 +237,11 @@ function Sketch(target_) {
     });
     toolBar.appendChild(saveButton);
     let canvasSave = function (event_) {
-        let imageData = canvasObj.toDataURL();
-        let newWindow = window.open('','_blank');
-        let imgDom = newWindow.document.createElement('img');
-        imgDom.src=canvasObj.toDataURL();
-        newWindow.document.body.appendChild(imgDom);
-        // let anchorDom = document.createElement('a');
-        // let eventObj = document.createEvent("HTMLEvents");
-        // eventObj.initEvent("click");
-        // anchorDom.download = 'sketch.png';
-        // anchorDom.href = imageData;
-        // anchorDom.dispatchEvent(eventObj);
+        let anchorDom = document.createElement('a');
+        anchorDom.href=canvasObj.toDataURL("image/png");
+        anchorDom.download='sketch.png';
+        anchorDom.click();
+        // downloadFile('sketch.png', canvasObj.toDataURL("image/png"));
     }
     saveButton.addEventListener('click', canvasSave);
 
@@ -288,7 +306,7 @@ function Sketch(target_) {
                 let eventOffset = getEventOffset(event_, canvasObj);
                 canvasContext.clearRect(
                     eventOffset.x - config.radius * config.eraserZoom, eventOffset.y - config.radius * config.eraserZoom,
-                    config.radius * 2 * config.eraserZoom, config.radius * config.eraserZoom,
+                    config.radius * 2 * config.eraserZoom, config.radius * config.eraserZoom
                 )
                 //***** update config */
                 config.lastPointX = eventOffset.x;
@@ -302,12 +320,12 @@ function Sketch(target_) {
                 let eventOffset = getEventOffset(event_, canvasObj);
                 let linePathArray = linePath(
                     config.lastPointX, config.lastPointY,
-                    eventOffset.x, eventOffset.y,
+                    eventOffset.x, eventOffset.y
                 )
                 linePathArray.forEach(function (point_) {
                     canvasContext.clearRect(
                         point_.x - config.radius * config.eraserZoom, point_.y - config.radius * config.eraserZoom,
-                        config.radius * 2 * config.eraserZoom, config.radius * 2 * config.eraserZoom,
+                        config.radius * 2 * config.eraserZoom, config.radius * 2 * config.eraserZoom
                     )
                 })
                 //***** update config */
@@ -402,3 +420,4 @@ function Sketch(target_) {
 
 let sketchObj = document.querySelector('#sketch');
 let target = new Sketch(sketchObj);
+// alert(1);
