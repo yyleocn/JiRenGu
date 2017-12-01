@@ -21,6 +21,36 @@ let createTag = function (tag_, attr_) {
     return tagObj;
 };
 
+let linePath = function (startX_, startY_, endX_, endY_) {
+    let rangeX = endX_ - startX_;
+    let rangeY = endY_ - startY_;
+    if (!rangeX && !rangeY) {
+        return [];
+    }
+    let pathArray = [];
+    if (Math.abs(rangeX) >= Math.abs(rangeY)) {
+        let direction = rangeX > 0 ? 1 : -1;
+        for (let iLoop = 1; iLoop < Math.abs(rangeX); iLoop++) {
+            let pointX = startX_ + iLoop * direction;
+            let pointY = Math.floor(startY_ + iLoop * direction / rangeX * rangeY + 0.5);
+            pathArray.push({
+                x: pointX,
+                y: pointY,
+            });
+        }
+    } else {
+        let direction = rangeY > 0 ? 1 : -1;
+        for (let iLoop = 1; iLoop < Math.abs(rangeY); iLoop++) {
+            let pointY = startY_ + iLoop * direction;
+            let pointX = Math.floor(startX_ + iLoop * direction / rangeY * rangeX + 0.5);
+            pathArray.push({
+                x: pointX,
+                y: pointY,
+            });
+        }
+    }
+    return pathArray;
+}
 
 let canvasFillCircle = function (context_, x_, y_, radius_, color_) {
     if (!context_ instanceof CanvasRenderingContext2D) {
@@ -51,18 +81,18 @@ let canvasFillLine = function (context_, fromX_, fromY_, toX_, toY_, width_, col
 
 let isTouchDevice = function () {
     return 'ontouchstart' in window;
-}
+};
 
 let getEvent = function (event_) {
     console.log(event_);
 };
 
-function sketch(target_) {
+function Sketch(target_) {
     'use strict';
-    if (!(this instanceof sketch)) {
-        console.warn('sketch function called');
-        return new sketch(target_);
-    };
+    if (!(this instanceof Sketch)) {
+        console.warn('Sketch function called');
+        return new Sketch(target_);
+    }
 
     //***** init config */
     let config = {
@@ -72,7 +102,7 @@ function sketch(target_) {
         mouseClicking: false,
         lastPointX: 0,
         lastPointY: 0,
-
+        eraserZoom: 3,
     };
 
     //***** get event offset */
@@ -100,7 +130,7 @@ function sketch(target_) {
     //** init toolBar */
     let toolBar = createTag('div', {
         className: 'toolBar',
-    })
+    });
     target_.appendChild(toolBar);
 
     //***** init canvas */
@@ -109,7 +139,7 @@ function sketch(target_) {
     });
     let canvasContext = canvasObj.getContext('2d');
     let canvasResize = function () {
-        var canvasCopy = document.createElement('canvas'); // create a canvas copy dom
+        let canvasCopy = document.createElement('canvas'); // create a canvas copy dom
         canvasCopy.width = canvasObj.width;
         canvasCopy.height = canvasObj.height;
         canvasCopy.getContext('2d').drawImage(canvasObj, 0, 0); // copy the 'old' canvas
@@ -144,15 +174,18 @@ function sketch(target_) {
         className: 'colorPicker',
         value: config.color,
     });
+    toolBar.appendChild(colorPicker);
     let colorPickerChange =
         function (event_) {
             config.color = event_.target.value;
-        }
+            if (document.querySelector('.toolBar .modePicker.icon-pen')) {
+                document.querySelector('.toolBar .modePicker.icon-pen').click();
+            }
+        };
     colorPicker.addEventListener(
         'change',
         colorPickerChange
     );
-    toolBar.appendChild(colorPicker);
 
     //** init widthPicker */
     let widthPicker = createTag('input', {
@@ -162,16 +195,15 @@ function sketch(target_) {
         max: 5,
         value: config.radius,
     });
+    toolBar.appendChild(widthPicker);
     let widthPickerChange =
         function (event_) {
             config.radius = parseInt(event_.target.value);
-        }
+        };
     widthPicker.addEventListener(
         'change',
         widthPickerChange
     );
-    toolBar.appendChild(widthPicker);
-
 
 
     /***** save button */
@@ -179,10 +211,21 @@ function sketch(target_) {
         className: ['iconfont', 'icon-download', ],
         mode: 'default',
     });
-    saveButton.addEventListener('click', function (event_) {
-        console.log(event_);
-    })
     toolBar.appendChild(saveButton);
+    let canvasSave = function (event_) {
+        let imageData = canvasObj.toDataURL();
+        let newWindow = window.open('','_blank');
+        let imgDom = newWindow.document.createElement('img');
+        imgDom.src=canvasObj.toDataURL();
+        newWindow.document.body.appendChild(imgDom);
+        // let anchorDom = document.createElement('a');
+        // let eventObj = document.createEvent("HTMLEvents");
+        // eventObj.initEvent("click");
+        // anchorDom.download = 'sketch.png';
+        // anchorDom.href = imageData;
+        // anchorDom.dispatchEvent(eventObj);
+    }
+    saveButton.addEventListener('click', canvasSave);
 
 
     /***** clear button */
@@ -190,33 +233,33 @@ function sketch(target_) {
         className: ['iconfont', 'icon-delete2f', ],
         mode: 'default',
     });
+    toolBar.appendChild(clearButton);
     clearButton.addEventListener('click', function (event_) {
         canvasContext.clearRect(
             0, 0,
             canvasObj.clientWidth, canvasObj.clientHeight
         )
-    })
-    toolBar.appendChild(clearButton);
+    });
 
     /***** event bind cache list */
     let clearEventBind = function () {};
 
     /***** define click event bind */
     let modeEventBind = {
-        'pen': {
-            'mouseDown': function (event_) {
+        pen: {
+            mouseDown: function (event_) {
                 let eventOffset = getEventOffset(event_, canvasObj);
                 canvasFillCircle(
                     canvasContext,
                     eventOffset.x, eventOffset.y,
                     config.radius, config.color
-                )
+                );
                 //***** update config */
                 config.lastPointX = eventOffset.x;
                 config.lastPointY = eventOffset.y;
                 config.mouseClicking = true;
             },
-            'mouseMove': function (event_) {
+            mouseMove: function (event_) {
                 if (!config.mouseClicking) {
                     return undefined;
                 }
@@ -236,10 +279,45 @@ function sketch(target_) {
                 config.lastPointX = eventOffset.x;
                 config.lastPointY = eventOffset.y;
             },
-            'mouseUp': function (event_) {
+            mouseUp: function (event_) {
                 config.mouseClicking = false;
             },
         },
+        eraser: {
+            mouseDown: function (event_) {
+                let eventOffset = getEventOffset(event_, canvasObj);
+                canvasContext.clearRect(
+                    eventOffset.x - config.radius * config.eraserZoom, eventOffset.y - config.radius * config.eraserZoom,
+                    config.radius * 2 * config.eraserZoom, config.radius * config.eraserZoom,
+                )
+                //***** update config */
+                config.lastPointX = eventOffset.x;
+                config.lastPointY = eventOffset.y;
+                config.mouseClicking = true;
+            },
+            mouseMove: function (event_) {
+                if (!config.mouseClicking) {
+                    return undefined;
+                }
+                let eventOffset = getEventOffset(event_, canvasObj);
+                let linePathArray = linePath(
+                    config.lastPointX, config.lastPointY,
+                    eventOffset.x, eventOffset.y,
+                )
+                linePathArray.forEach(function (point_) {
+                    canvasContext.clearRect(
+                        point_.x - config.radius * config.eraserZoom, point_.y - config.radius * config.eraserZoom,
+                        config.radius * 2 * config.eraserZoom, config.radius * 2 * config.eraserZoom,
+                    )
+                })
+                //***** update config */
+                config.lastPointX = eventOffset.x;
+                config.lastPointY = eventOffset.y;
+            },
+            mouseUp: function (event_) {
+                config.mouseClicking = false;
+            },
+        }
     };
 
     //** init modePicker */
@@ -257,6 +335,7 @@ function sketch(target_) {
         switch (target.mode) {
             case 'pen':
                 {
+                    canvasObj.style = 'cursor:crosshair';
                     canvasEventBind(
                         canvasObj,
                         modeEventBind.pen.mouseDown,
@@ -267,10 +346,18 @@ function sketch(target_) {
                 }
             case 'eraser':
                 {
+                    canvasObj.style = 'cursor:cell';
+                    canvasEventBind(
+                        canvasObj,
+                        modeEventBind.eraser.mouseDown,
+                        modeEventBind.eraser.mouseMove,
+                        modeEventBind.eraser.mouseUp
+                    );
                     break;
                 }
             default:
                 {
+                    canvasObj.style = 'cursor:all-scroll';
                     canvasEventBind(
                         canvasObj,
                         null,
@@ -286,32 +373,32 @@ function sketch(target_) {
         className: ['iconfont', 'icon-eraser', 'modePicker', ],
         mode: 'eraser',
     });
-    modeEraser.onclick = modePick;
     toolBar.appendChild(modeEraser);
+    modeEraser.onclick = modePick;
 
     let modePen = createTag('i', {
         className: ['iconfont', 'icon-pen', 'modePicker', ],
         mode: 'pen',
     });
-    modePen.onclick = modePick;
     toolBar.appendChild(modePen);
+    modePen.onclick = modePick;
     modePen.click();
 
     let modeDefault = createTag('i', {
         className: ['iconfont', 'icon-hand', 'modePicker', ],
         mode: 'default',
     });
-    modeDefault.onclick = modePick;
     toolBar.appendChild(modeDefault);
+    modeDefault.onclick = modePick;
 
     /***** debug */
-    console.log([
-        target_,
-        config,
-        canvasObj,
-        canvasContext
-    ])
-}
+    // console.log([
+    //     target_,
+    //     config,
+    //     canvasObj,
+    //     canvasContext,
+    // ]);
+};
 
 let sketchObj = document.querySelector('#sketch');
-let target = new sketch(sketchObj);
+let target = new Sketch(sketchObj);
