@@ -318,7 +318,7 @@ function Sketch(target_) {
                 canvasContext.clearRect(
                     eventOffset.x - config.radius * config.eraserZoom, eventOffset.y - config.radius * config.eraserZoom,
                     config.radius * 2 * config.eraserZoom, config.radius * config.eraserZoom
-                )
+                );
                 //***** update config */
                 config.lastPointX = eventOffset.x;
                 config.lastPointY = eventOffset.y;
@@ -332,13 +332,13 @@ function Sketch(target_) {
                 let linePathArray = linePath(
                     config.lastPointX, config.lastPointY,
                     eventOffset.x, eventOffset.y
-                )
+                );
                 linePathArray.forEach(function (point_) {
                     canvasContext.clearRect(
                         point_.x - config.radius * config.eraserZoom, point_.y - config.radius * config.eraserZoom,
                         config.radius * 2 * config.eraserZoom, config.radius * 2 * config.eraserZoom
                     )
-                })
+                });
                 //***** update config */
                 config.lastPointX = eventOffset.x;
                 config.lastPointY = eventOffset.y;
