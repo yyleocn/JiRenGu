@@ -1,8 +1,8 @@
 let $carouselBox = jQuery('.carouselBox');
 let $carouselContent = jQuery('.carouselBox .carouselContent');
-let $carouseLImgArr = jQuery('.carouselBox .carouselContent img');
+let $carouselImgArr = jQuery('.carouselBox .carouselContent img');
 let $carouselTagList = jQuery('.carouselBox .carouselTagList');
-$carouseLImgArr.each(function (index_, imgDOM_) {
+$carouselImgArr.each(function (index_, imgDOM_) {
     let $carouselTag = jQuery('<div/>', {
         text: index_ + 1,
         class: 'carouselTag'
