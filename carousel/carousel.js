@@ -7,10 +7,9 @@ $carouseLImgArr.each(function (index_, imgDOM_) {
         text: index_ + 1,
         class: 'carouselTag'
     });
-    let offsetLeft = imgDOM_.offsetLeft;
     $carouselTag.on('click', function () {
         $carouselContent.css({
-            left: (-1 * offsetLeft) + 'px'
+            left: (-1 * imgDOM_.offsetLeft) + 'px'
         });
         jQuery(this).addClass('active').siblings('.active').removeClass('active');
     });
@@ -20,7 +19,6 @@ $carouseLImgArr.each(function (index_, imgDOM_) {
 let carouseNext = function () {
     let $carouselTagArr = jQuery('div.carouselTag');
     let $nextTag = $carouselTagArr.filter('.active+.carouselTag:first');
-    console.dir($nextTag);
     if (!$nextTag.length) {
         $nextTag = $carouselTagArr.filter(':first');
     }
