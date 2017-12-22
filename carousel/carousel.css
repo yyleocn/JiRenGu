@@ -1,0 +1,40 @@
+.carouselBox {
+    width: 505px;
+    height: 281px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carouselBox .carouselContent {
+    display: flex;
+    align-items: flex-start;
+    position: absolute;
+    transition: all 0.25s;
+    top: 0;
+    left: 0;
+}
+
+.carouselBox .carouselTagList {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1rem;
+    left: 0;
+    bottom: 0.5em;
+}
+
+.carouselBox .carouselTagList .carouselTag {
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    border-radius: 25%;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.25s;
+}
+
+.carouselBox .carouselTagList .carouselTag.active {
+    background: rgba(0, 255, 255, 0.7);
+}
