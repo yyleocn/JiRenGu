@@ -19,8 +19,8 @@ $carouseLImgArr.each(function (index_, imgDOM_) {
 
 let carouseNext = function () {
     let $carouselTagArr = jQuery('div.carouselTag');
-    let $activeCarouselTag = $carouselTagArr.filter('.active:first');
-    let $nextTag = $activeCarouselTag.nextAll('div.carouselTag:first');
+    let $nextTag = $carouselTagArr.filter('.active+.carouselTag:first');
+    console.dir($nextTag);
     if (!$nextTag.length) {
         $nextTag = $carouselTagArr.filter(':first');
     }
