@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 200px;
+            background: #CCC;
+            transition: all linear 0.5s;
+            position: relative;
+            margin-left: 10%;
+        }
+        .hide{
+            display: none;
+            margin-left:0;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    setTimeout(function () {
+        $('.box').addClass('hide')
+    },1000)
+</script>
+</body>
+</html>

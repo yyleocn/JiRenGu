@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+<script>
+    let unique = function (arr_) {
+        return arr_.reduce(function (res_, current_) {
+            if (res_.indexOf(current_) === -1) {
+                res_.push(current_);
+            }
+            return res_;
+        }, [])
+    };
+    console.log(unique([1, 5, 2, 3, 4, 2, 3, 1, 3, 4]));
+    let uniqueES6 = function (arr_) {
+        return Array.from(new Set(arr_));
+    };
+    console.log(uniqueES6([1, 5, 2, 3, 4, 2, 3, 1, 3, 4]));
+</script>
+</body>
+</html>
