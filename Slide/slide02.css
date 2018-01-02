@@ -1,0 +1,32 @@
+.slideBox {
+    width: 505px;
+    height: 281px;
+    position: relative;
+    overflow: hidden;
+}
+
+.slideBox .slideItem {
+    display: none;
+    position: absolute;
+    transition: all 1s;
+    top: 100%;
+    left: 0;
+}
+
+.slideBox .slideItem.current {
+    display: block;
+    top: 0;
+    left: 0;
+}
+
+.slideBox .slideItem.prev {
+    display: block;
+    top: 0;
+    left: -100%;
+}
+
+.slideBox .slideItem.next {
+    display: block;
+    top: 0;
+    left: 100%;
+}

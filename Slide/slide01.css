@@ -1,11 +1,11 @@
-.carouselBox {
+.slideBox {
     width: 505px;
     height: 281px;
     position: relative;
     overflow: hidden;
 }
 
-.carouselBox .carouselContent {
+.slideBox .slideContent {
     display: flex;
     align-items: flex-start;
     position: absolute;
@@ -14,7 +14,7 @@
     left: 0;
 }
 
-.carouselBox .carouselTagList {
+.slideBox .slideTagList {
     position: absolute;
     width: 100%;
     text-align: center;
@@ -24,7 +24,7 @@
     bottom: 0.5em;
 }
 
-.carouselBox .carouselTagList .carouselTag {
+.slideBox .slideTagList .slideTag {
     display: inline-block;
     height: 2em;
     width: 2em;
@@ -35,6 +35,6 @@
     transition: all 0.25s;
 }
 
-.carouselBox .carouselTagList .carouselTag.active {
+.slideBox .slideTagList .slideTag.active {
     background: rgba(0, 255, 255, 0.7);
 }
