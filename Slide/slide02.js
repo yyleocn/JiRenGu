@@ -12,28 +12,73 @@ let slideRun = (item_, reverse_) => {
     }
     let next = jQuery(item_).addClass(nextClass);
     let current = slideImgArr.filter('.current');
-    setTimeout(() => {
-            next.addClass('current').removeClass(nextClass);
-            current.addClass(prevClass).removeClass('current');
-            current.one('transitionend', event_ => {
-                jQuery(event_.target).removeClass('current next prev');
-            });
-        }, 1
-    )
-    ;
+    next.offset();
+    next.addClass('current').removeClass(nextClass);
+    current.addClass(prevClass).removeClass('current');
+    current.one('transitionend', event_ => {
+        jQuery(event_.target).removeClass('current next prev');
+    });
+    // let animationFrameFunc = () => {
+    //     next.addClass('current').removeClass(nextClass);
+    //     current.addClass(prevClass).removeClass('current');
+    //     current.one(
+    //         'transitionend',
+    //         event_ => {
+    //             jQuery(event_.target).removeClass('current next prev');
+    //         }
+    //     );
+    // };
+    // requestAnimationFrame(
+    //     () => {
+    //         next.addClass(nextClass);
+    //         requestAnimationFrame(animationFrameFunc);
+    //     }
+    // );
 };
 
-let slideNext = () => {
+let slideNext = (reverse_) => {
     let currentItem = slideImgArr.filter('.current');
     let currentIndex = slideImgArr.index(currentItem[0]);
-    let nextIndex = currentIndex + 1;
-    if (nextIndex >= slideImgArr.length ) {
-        nextIndex = 0;
+
+    let nextIndex;
+    if (reverse_) {
+        nextIndex = currentIndex - 1;
+        if (nextIndex < 0) {
+            nextIndex = slideImgArr.length - 1;
+        }
+    } else {
+        nextIndex = currentIndex + 1;
+        if (nextIndex >= slideImgArr.length) {
+            nextIndex = 0;
+        }
     }
-    console.log(nextIndex);
     slideRun(slideImgArr.eq(nextIndex));
 };
 
-setInterval(
-    slideNext, 2000
-);
+let slideHandler = null;
+
+let slideStart = () => {
+    if (slideHandler) {
+        return;
+    }
+    slideHandler = setInterval(
+        slideNext, 2000
+    );
+};
+let slideStop = () => {
+    if (!slideHandler) {
+        return;
+    }
+    clearInterval(slideHandler);
+    slideHandler = null;
+};
+
+jQuery(document).on('webkitvisibilitychange', (event_) => {
+    if (document.hidden) {
+        slideStop();
+    } else {
+        slideStart();
+    }
+});
+
+slideStart();
