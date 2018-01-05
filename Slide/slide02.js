@@ -18,22 +18,6 @@ let slideRun = (item_, reverse_) => {
     current.one('transitionend', event_ => {
         jQuery(event_.target).removeClass('current next prev');
     });
-    // let animationFrameFunc = () => {
-    //     next.addClass('current').removeClass(nextClass);
-    //     current.addClass(prevClass).removeClass('current');
-    //     current.one(
-    //         'transitionend',
-    //         event_ => {
-    //             jQuery(event_.target).removeClass('current next prev');
-    //         }
-    //     );
-    // };
-    // requestAnimationFrame(
-    //     () => {
-    //         next.addClass(nextClass);
-    //         requestAnimationFrame(animationFrameFunc);
-    //     }
-    // );
 };
 
 let slideNext = (reverse_) => {
