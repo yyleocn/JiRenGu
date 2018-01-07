@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSONP demo</title>
+</head>
+<body>
+
+</body>
+<script>
+    let jsonP = (url_) => {
+        let scriptDom = document.createElement('script');
+        scriptDom.src = url_;
+        scriptDom.onload = (event_) => {
+            event_.currentTarget.remove();
+        };
+        scriptDom.onerror = (event_) => {
+            console.error(`JSONP load failed @ ${url_}`);
+            event_.currentTarget.remove();
+        };
+        document.body.appendChild(scriptDom);
+    };
+
+    window.dataProcess = (data_) => {
+        document.body.innerText = data_.message || '数据错误';
+    };
+
+    jsonP('//jack.com:8002/JSONP?callback=dataProcess');
+</script>
+</html>
