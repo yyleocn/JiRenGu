@@ -4,7 +4,8 @@ let stopPropagation = (event_) => {
 
 jQuery('button[data-action]').each((index_, item_) => {
     let $item = jQuery(item_);
-    if ($item.data('action') === 'popover') {
+    if ($item.data('action') !== 'popover') {
+    } else {
         let target = $item.data('target');
         let $target = jQuery(`div[data-popover=${target}]`).eq(0);
         if (!$target.length) {
