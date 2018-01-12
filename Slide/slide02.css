@@ -30,3 +30,25 @@
     top: 0;
     left: 100%;
 }
+
+.slideBox .iconfont {
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    margin-top: -10em;
+    line-height: 20em;
+    left: auto;
+    right: auto;
+    font-size: 20px;
+    color: rgba(32, 32, 32, 0.7);
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.slideBox .icon-next {
+    right: 0;
+}
+
+.slideBox .icon-prev {
+    left: 0;
+}
