@@ -1,8 +1,8 @@
-let jQueryX = function (node_) {
+let jQueryX = (node_) => {
     let nodeArr = {
         length: 0,
     };
-    let nodeAdd = function (nodeElem_) {
+    let nodeAdd = (nodeElem_) => {
         nodeArr[nodeArr.length] = nodeElem_;
         nodeArr.length += 1;
     };
@@ -32,7 +32,7 @@ let jQueryX = function (node_) {
             nodeClassList.add.apply(nodeClassList, arguments);
         }
     };
-    nodeArr.setText = function (text_) {
+    nodeArr.setText = (text_) => {
         for (let i = 0; i < nodeArr.length; i++) {
             nodeArr[i].textContent = text_;
         }

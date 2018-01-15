@@ -74,7 +74,7 @@ let linePath = function (startX_, startY_, endX_, endY_) {
         }
     }
     return pathArray;
-}
+};
 
 let canvasFillCircle = function (context_, x_, y_, radius_, color_) {
     if (!context_ instanceof CanvasRenderingContext2D) {

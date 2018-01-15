@@ -14,7 +14,7 @@ let createTag = function (tag_, attr_) {
 
 function configManager(name_, default_) {
     'use strict';
-    if (!this instanceof configManager) {
+    if (!(this instanceof configManager)) {
         return new configManager(name_, default_);
     }
     let config = null;
@@ -27,17 +27,17 @@ function configManager(name_, default_) {
         console.log('Load default config.');
         config = default_ || {};
     }
-    this.getConfig = function (key_) {
+    this.getConfig = (key_) => {
         return config[key_]
     };
-    this.setConfig = function (key_, value_) {
+    this.setConfig = (key_, value_) => {
         config[key_] = value_;
         this.saveConfig();
     };
-    this.saveConfig = function () {
+    this.saveConfig = () => {
         localStorage.setItem(name_, JSON.stringify(config))
     }
-};
+}
 
 let keyboardPressEvent = function (keyboardUrlConfig_, event_) {
     let key = event_.key;
@@ -86,14 +86,14 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                     if (keyboardUrlConfig_.getConfig(key_)) {
                         favicon.src = 'http://' + keyboardUrlConfig_.getConfig(key_) + '/favicon.ico'
                     }
-                    favicon.onerror = function (event_) {
+                    favicon.onerror = (event_) => {
                         if (event_.target.src !== defaultFavicon_) {
                             event_.target.src = defaultFavicon_
                         }
-                    }
+                    };
                     keyObj.appendChild(favicon);
                 }
-                keyObj.oncontextmenu = function (event_) {
+                keyObj.oncontextmenu = (event_) => {
                     let result = window.prompt('请输入快捷键 ' + key_ + ' 的网址', '');
                     if (result) {
                         keyboardUrlConfig_.setConfig(key_, result);
@@ -111,7 +111,7 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
                 //     }
                 // }
             } else {
-                keyObj.oncontextmenu = function (event_) {
+                keyObj.oncontextmenu = (event_) => {
                     event_.preventDefault();
                     event_.target.blur();
                     event_.cancelBubble = true;
@@ -125,16 +125,16 @@ let keyboardCreate = function (box_, keyboardUrlConfig_, defaultFavicon_, blankF
         box_.appendChild(document.createElement('br'));
     });
     return true;
-}
+};
 
 
 /***** define config */
 
 let keyboardLetterArray = [
-    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'back', ],
-    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', ],
-    ['caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', ],
-    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift', ],
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'back',],
+    ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',],
+    ['caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter',],
+    ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift',],
 ];
 
 let keyboardUrlConfigDefault = {
