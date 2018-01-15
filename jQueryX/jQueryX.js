@@ -39,3 +39,19 @@ let jQueryX = function (node_) {
     };
     return nodeArr;
 };
+
+jQueryX.ajax = ({url_, method_, body_, success_, fail_}) => {
+    let request = new XMLHttpRequest();
+    request.open(method_, url_);
+    request.onreadystatechange = (event_) => {
+        if (request.readyState !== 4) {
+            return
+        }
+        if (request.status >= 200 && request.status < 300) {
+            success_.call(undefined, request.responseText);
+        } else if (request.status >= 400) {
+            fail_.call(undefined, request.responseText);
+        }
+    }
+
+};
