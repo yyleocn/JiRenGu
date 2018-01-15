@@ -41,17 +41,18 @@ let jQueryX = function (node_) {
 };
 
 jQueryX.ajax = ({url_, method_, body_, success_, fail_}) => {
-    let request = new XMLHttpRequest();
-    request.open(method_, url_);
-    request.onreadystatechange = (event_) => {
-        if (request.readyState !== 4) {
-            return
+    return new Promise(function (resolve_, reject_) {
+        let request = new XMLHttpRequest();
+        request.open(method_, url_);
+        request.onreadystatechange = (event_) => {
+            if (request.readyState !== 4) {
+                return
+            }
+            if (request.status >= 200 && request.status < 300) {
+                resolve_.call(undefined, request.responseText);
+            } else if (request.status >= 400) {
+                reject_.call(undefined, request.responseText);
+            }
         }
-        if (request.status >= 200 && request.status < 300) {
-            success_.call(undefined, request.responseText);
-        } else if (request.status >= 400) {
-            fail_.call(undefined, request.responseText);
-        }
-    }
-
+    });
 };
