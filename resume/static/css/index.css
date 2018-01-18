@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -17,6 +18,8 @@ a {
 section {
     position: relative;
     transition: 1s all;
+    margin: 60px auto 0;
+    max-width: 940px;
 }
 
 section h1 {
@@ -185,8 +188,7 @@ ul .navMenu li {
 }
 
 .info {
-    max-width: 940px;
-    margin: -340px auto 0;
+    margin-top: -340px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.4);
 }
 
@@ -305,15 +307,8 @@ ul .navMenu li {
     margin-top: 30px;
 }
 
-.selfIntroduction p {
-    max-width: 940px;
-    margin: 0 auto;
-}
-
 .skill {
     text-align: center;
-    margin: 60px auto 0;
-    max-width: 940px;
     color: #3d4451;
 }
 
@@ -392,8 +387,6 @@ ul .navMenu li {
 }
 
 .portfolio {
-    max-width: 940px;
-    margin: 60px auto 0;
     color: #3d4451;
     text-align: center;
 }
@@ -478,3 +471,66 @@ section.hidden {
     opacity: 0;
     transform: translateY(50px);
 }
+
+form#addComments {
+    margin: 20px auto 0;
+    width: 70%;
+}
+
+form#addComments input {
+    display: block;
+    float: left;
+    margin-top: 20px;
+    font-size: 1.25em;
+}
+
+form#addComments input[type=submit] {
+    float: right;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #FFF;
+    background: #496fe4;
+}
+
+form#addComments textarea[name=content] {
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+}
+
+form#addComments .postContent {
+    position: relative;
+    overflow: visible;
+}
+
+form#addComments .postContent::before,
+form#addComments .postContent::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -9px;
+    left: 3.5em;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-width: 10px 10px 0 10px;
+    border-color: #FFF transparent transparent transparent;
+    border-style: solid;
+}
+
+form#addComments .postContent::before {
+    bottom: -10px;
+    border-color: #777 transparent transparent transparent;
+}
+
+input, textarea {
+    border-radius: 5px;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    padding: 5px;
+    resize: none;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+    border: 1px solid #777;
+}
+
