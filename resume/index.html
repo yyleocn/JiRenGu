@@ -204,10 +204,24 @@
         <img src="./static/img/works/3.jpg" class="works03" alt="Works03">
     </div>
 </section>
+
+<section class="portfolio hidden" id="comment">
+    <h1>评论</h1>
+    <form action="" method="post" id="addComments" class="clearFix">
+        <div class="postContent">
+            <textarea name="content" cols="30" rows="2" placeholder="评论内容"></textarea>
+        </div>
+        <input type="text" name="userName" size="10" maxlength="20" placeholder="用户名">
+        <input type="submit" value="提交">
+    </form>
+    <ul class="comments">
+
+    </ul>
+</section>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tween.js/17.1.1/Tween.min.js"></script>
 <script src="//cdn1.lncld.net/static/js/3.5.0/av-min.js"></script>
 <script src="./static/js/index.js"></script>
-<script src="./static/js/LeanCloud.js"></script>
+<script src="./static/js/comment.js"></script>
 <script>
     setTimeout(function () {
         try {
