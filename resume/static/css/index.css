@@ -499,13 +499,30 @@ form#addComments textarea[name=content] {
     display: block;
 }
 
-form#addComments .postContent {
+form#addComments .commentContent {
     position: relative;
     overflow: visible;
 }
 
-form#addComments .postContent::before,
-form#addComments .postContent::after {
+form#addComments input, textarea {
+    outline: none;
+    border-radius: 5px;
+    font-size: 1em;
+    line-height: 1.5em;
+    padding: 5px;
+    resize: none;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+    border: 1px solid #777;
+}
+
+/*form#addComments input:focus,*/
+/*form#addComments textarea:focus{*/
+    /*border-color:#2d89ef;*/
+/*}*/
+
+
+form#addComments .commentContent::before,
+form#addComments .commentContent::after {
     content: " ";
     display: block;
     position: absolute;
@@ -519,18 +536,20 @@ form#addComments .postContent::after {
     border-style: solid;
 }
 
-form#addComments .postContent::before {
+form#addComments .commentContent::before {
     bottom: -10px;
     border-color: #777 transparent transparent transparent;
 }
 
-input, textarea {
-    border-radius: 5px;
-    font-size: 1.25em;
-    line-height: 1.5em;
-    padding: 5px;
-    resize: none;
-    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-    border: 1px solid #777;
+
+#comment ul.commentList {
+    width: 70%;
+    margin: 0 auto;
+    list-style: none;
+    text-align: left;
 }
 
+#comment ul.commentList li{
+    padding: 10px 30px;
+    border-bottom: 1px solid #777;
+}
