@@ -45,14 +45,14 @@ jQueryX.ajax = ({url_, method_, body_, success_, fail_}) => {
         let request = new XMLHttpRequest();
         request.open(method_, url_);
         request.onreadystatechange = (event_) => {
-            if (request.readyState !== 4) {
-                return
+            if (request.readyState === 4) {
+                if (request.status >= 200 && request.status < 300) {
+                    resolve_.call(undefined, request.responseText);
+                } else if (request.status >= 400) {
+                    reject_.call(undefined, request.responseText);
+                }
             }
-            if (request.status >= 200 && request.status < 300) {
-                resolve_.call(undefined, request.responseText);
-            } else if (request.status >= 400) {
-                reject_.call(undefined, request.responseText);
-            }
-        }
+        };
+        request.send(body_);
     });
 };

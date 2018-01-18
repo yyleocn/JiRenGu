@@ -99,3 +99,4 @@ let portfolioTagSwitch = function (event_) {
 document.querySelectorAll('.portfolioNav .portfolioTag').forEach(function (item_) {
     addEvent(item_, 'click', portfolioTagSwitch);
 });
+
