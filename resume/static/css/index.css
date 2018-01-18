@@ -544,9 +544,10 @@ form#addComments .commentContent::before {
 
 #comment ul.commentList {
     width: 70%;
-    margin: 0 auto;
+    margin: 20px auto;
     list-style: none;
     text-align: left;
+    border-top: 1px solid #777;
 }
 
 #comment ul.commentList li{
