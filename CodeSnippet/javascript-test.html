@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+    const testObj = function () {
+        if (!new.target) {
+            console.warn("Constructor must be called with new");
+//            throw "Constructor must be called with new";
+        }
+    };
+    testObj();
+    new testObj();
+    let x = {};
+    x.test = testObj;
+    x.test();
+</script>
+</body>
+</html>
