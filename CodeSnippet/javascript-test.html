@@ -7,17 +7,42 @@
 <body>
 <script>
     'use strict';
-    const testObj = function () {
-        if (!new.target) {
-            console.warn("Constructor must be called with new");
-//            throw "Constructor must be called with new";
-        }
-    };
-    testObj();
-    new testObj();
-    let x = {};
-    x.test = testObj;
-    x.test();
+    //    const testObj = function () {
+    //        if (!new.target) {
+    //            console.warn("Constructor must be called with new");
+    ////            throw "Constructor must be called with new";
+    //        }
+    //    };
+    //    testObj();
+    //    new testObj();
+    //    let x = {};
+    //    x.test = testObj;
+    //    x.test();
+    let promiseObj = new Promise((resolve_, reject_) => {
+        setTimeout(() => {
+            console.log('setTimeout run');
+            throw new Error('Error!');
+        },1000);
+        console.log('Promise create');
+        resolve_('OK!');
+    });
+    promiseObj.catch((err_) => {
+        console.log(err_);
+    });
+    setTimeout(2000, () => {
+        promiseObj
+            .then(
+                (text_) => {
+                    console.log(text_);
+                },
+                (err_) => {
+                    console.log(err_);
+                })
+            .catch((err_) => {
+                    console.log(err_);
+                }
+            );
+    });
 </script>
 </body>
 </html>

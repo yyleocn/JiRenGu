@@ -33,5 +33,10 @@ Function.prototype.__proto__ === Object.prototype // 为 true
 
 
 # Answer 4
+~~~
+let createClass = function
+~~~
 
-
+# Answer 5
+* `Promise`对象用于表示一个异步操作的最终状态（完成或失败），以及其返回的值。
+* `Promise`可以实现异步操作。

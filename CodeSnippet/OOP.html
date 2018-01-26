@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Human(options) {
+        this.name = options.name;
+        this.city = options.city;
+    } // 构造函数结束
+
+    Human.prototype.species = 'Human';
+    Human.prototype.walk = () => {
+        console.log('I can walk.');
+    };
+    Human.prototype.useTools = () => {
+        console.log('I can useTools.');
+    };
+
+    let human = new Human({name: 'Frank', city: 'Hangzhou'});
+    let human2 = new Human({name: 'Jack', city: 'Hangzhou'});
+</script>
+</body>
+</html>
