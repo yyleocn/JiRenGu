@@ -1,0 +1,21 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.cssEditor {
+    overflow-y: auto;
+}
+
+@font-face {
+    font-family: iosevka;
+    src: url('iosevka-slab-regular.woff');
+}
+
+.token.punctuation,
+.token.property,
+.token.selector,
+.token.comment {
+    color: inherit;
+}

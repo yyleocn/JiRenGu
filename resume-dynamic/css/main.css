@@ -1,0 +1,68 @@
+/*
+ 你好，我是杨乐，前端工程师一枚
+ 只用普通的简历显得有些单调了
+ 我就换个方法介绍一下我自己吧
+ */
+
+/* 来点过渡效果吧 */
+* {
+    transition: all 0.5s;
+}
+
+/* 给页面加个背景色 */
+body {
+    color: #FFFFFF;
+    background: #002240;
+}
+
+/*然后设置一下编辑器样式*/
+.cssEditor {
+    width: 47vw;
+    height: 95vh;
+    float: left;
+    border: 2px solid #CCCCCC;
+    margin: 10px;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* 我需要一点代码高亮 */
+.token.selector {
+    color: #a6e22e;
+}
+
+.token.property {
+    color: #f92672;
+}
+
+.token.punctuation {
+    color: #f8f8f2;
+}
+
+.token.comment {
+    color: slategray;
+}
+
+/*
+  加一点动画效果
+  比如窗口抖动
+  */
+@keyframes shake {
+    25% {
+        transform: translateX(5px) translateY(5px);
+    }
+    75% {
+        transform: translateX(-5px) translateY(-5px);
+    }
+}
+
+/* 测试一下吧 */
+.cssEditor {
+    animation: shake 0.1s 5;
+}
+
+/*
+  看起来效果不错，对吧
+  不过这里好像实现不了太高端的效果
+  我们换个地方继续
+  */
