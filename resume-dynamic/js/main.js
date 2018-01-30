@@ -1,13 +1,13 @@
 !function () {
-    let mainCSS = document.querySelector('#mainCSS');
+    let mainCSS = document.querySelector('#cssBox');
     let mainCSSText = document.querySelector('#mainCSSText');
     let mainCSSRender = (content_) => {
         mainCSS.innerHTML = content_;
         mainCSSText.innerHTML = Prism.highlight(content_, Prism.languages.css);
-        mainCSSText.scrollTop=9999;
+        mainCSSText.scrollTop = 9999;
     };
 
-    let mainCSSAutoRender = (content_) => {
+    let mainCSSAutoRender = (content_, callback_) => {
         let i = 0;
         let baseText = mainCSS.innerHTML;
         intervalHandler = setInterval(() => {
@@ -15,7 +15,9 @@
             if (i >= content_.length) {
                 clearInterval(intervalHandler);
                 intervalHandler = undefined;
-                // callback_();
+                if (callback_) {
+                    callback_();
+                }
                 return;
             }
             mainCSSRender(baseText + content_.substr(0, i));
@@ -23,11 +25,12 @@
     };
 
     let intervalHandler = undefined;
-
-    $.ajax({
-        url: './css/main.css',
-        success: (data_) => {
-            mainCSSAutoRender(data_ + '\n');
-        }
+    new Promise((resolve_, reject_) => {
+        $.ajax({
+            url: './css/main.css',
+            success: (data_) => {
+                mainCSSAutoRender(data_ + '\n', resolve_);
+            }
+        });
     });
 }();

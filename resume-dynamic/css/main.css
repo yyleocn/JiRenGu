@@ -16,7 +16,7 @@ body {
 }
 
 /*然后设置一下编辑器样式*/
-.cssEditor {
+.editor {
     width: 47vw;
     height: 95vh;
     float: left;
@@ -57,12 +57,15 @@ body {
 }
 
 /* 测试一下吧 */
-.cssEditor {
+.editor {
     animation: shake 0.1s 5;
 }
 
 /*
-  看起来效果不错，对吧
-  不过这里好像实现不了太高端的效果
-  我们换个地方继续
+  看起来效果不错，不过这里好像实现不了太高端的效果
+  我们换个地方继续，先找一张白纸
   */
+
+.paper {
+
+}
