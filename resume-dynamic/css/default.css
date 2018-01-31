@@ -5,6 +5,8 @@
 }
 
 .editor {
+    width: 100vw;
+    height: 100vh;
     overflow-y: auto;
 }
 
@@ -18,4 +20,8 @@
 .token.selector,
 .token.comment {
     color: inherit;
+}
+
+.paper h1{
+    font-size:1.5em;
 }

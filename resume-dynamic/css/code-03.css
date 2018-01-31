@@ -1,0 +1,28 @@
+/*
+  貌似样式不太好看
+  增加点个性化的样式
+  */
+.paper {
+    font-family: "lucida Grande", Verdana, "Microsoft YaHei", sans-serif;
+    font-size:20px;
+}
+
+.paper * {
+    margin: 5px 10px;
+}
+
+.paper ul {
+    list-style: none;
+}
+
+.paper ul li::before {
+    content: '▷';
+    display: inline;
+    margin-right: 1em;
+}
+
+/*
+  好了，大概就是这个样子了
+  如果你有好的建议的话
+  可以给我发邮件  O(∩_∩)O~
+  */
