@@ -7,28 +7,34 @@
 <body>
 <script>
     'use strict';
-    let promiseObj = new Promise(function (resolve_, reject_) {
+    let promiseObj = new Promise((resolve_, reject_) => {
         setTimeout(() => {
             console.log('setTimeout run');
             resolve_('OK!');
-//            throw new Error('Error!');
-        }, 1000);
+        }, 3000);
         console.log('Promise create');
+        throw new Error('Error!');
     });
-    setTimeout(2000, () => {
-        promiseObj
-            .then(
-                (text_) => {
-                    console.log('Then resolve', text_);
-                },
-                (err_) => {
-                    console.log('Then reject', err_);
-                })
-            .catch((err_) => {
-                    console.log('Catch', err_);
-                }
-            );
+    promiseObj.catch((err_) => {
+        console.warn('Catch err', err_);
     });
+    promiseObj.then(
+        (text_) => {
+            console.log('Then 1 resolve', text_);
+            return Promise.resolve('Then 1 resolve return');
+        },
+        (err_) => {
+            console.warn('Then 1 reject', err_);
+            return 'Then 1 reject return';
+        }
+    ).then(
+        (text_) => {
+            console.log('Then 2 resolve', text_);
+        },
+        (err_) => {
+            console.warn('Then 2 reject', err_);
+        }
+    );
 </script>
 </body>
 </html>
