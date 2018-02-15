@@ -63,4 +63,4 @@ typings/
 
 dist/
 
-config.*
+*.config.php
